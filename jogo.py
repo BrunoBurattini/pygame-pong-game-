@@ -51,4 +51,22 @@ class Fogo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, 700)
         self.rect.y = random.randint(0,400)
-       
+  #criando bola
+
+def bola_create(bola_velocity_x,bola_velocity_y):
+
+    bola_x = screen_x/2-15
+    bola_y = screen_y/2-15
+    bola = pygame.Rect(bola_x,bola_y, 25, 25)
+
+    bola.center= (screen_x/2,screen_y/2)
+    bola_velocity_x *= random.choice((1,-1))
+    bola_velocity_y *= random.choice((1,-1))
+
+    prob = random.randint(0, 8)
+    if prob == 1:
+        color = 'orange'
+    else:
+        color = 'white'
+    
+    return [bola, bola.center, color]     
