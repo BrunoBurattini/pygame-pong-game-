@@ -42,3 +42,13 @@ def welcome_screen():
                     loop()
         pygame.display.update()
         clock.tick(60)
+class Fogo(pygame.sprite.Sprite):
+    def __init__(self, img):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, 700)
+        self.rect.y = random.randint(0,400)
+       
