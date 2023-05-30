@@ -143,4 +143,5 @@ def loop():
         Vestibulando.y = Vestibulando.y + Vestibulando_velocity
         if Vestibulando.top <= 0:
             Vestibulando.top = 0
-
+        if Vestibulando.bottom >= screen_y:
+            Vestibulando.bottom = screen_y
