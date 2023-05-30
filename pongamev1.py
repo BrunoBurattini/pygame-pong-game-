@@ -16,5 +16,3 @@ FPS = 240
 	
 background = pygame.image.load("fundo.jpg")
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-#loop do jogo
-
