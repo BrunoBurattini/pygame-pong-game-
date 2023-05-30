@@ -70,3 +70,78 @@ def bola_create(bola_velocity_x,bola_velocity_y):
         color = 'white'
     
     return [bola, bola.center, color]     
+#loop do jogo
+
+def loop():
+    times = 0
+    alunoInsper_score = 0
+    Vestibulando_score = 0
+    alunoInsper_velocity = 0
+    alunoInsper = pygame.Rect(5, screen_y / 2 - 70, 8, 130)
+    Vestibulando_velocity= 0
+    Vestibulando = pygame.Rect(screen_x - 12, screen_y/2-70, 8, 130)
+    
+    bola_velocity_x= 4*random.choice((1,-1))
+    bola_velocity_y= 4*random.choice((1,-1))
+
+    bola = bola_create(bola_velocity_x, bola_velocity_x)[0]
+    bola.center = bola_create(bola_velocity_x, bola_velocity_x)[1]
+    color = bola_create(bola_velocity_x, bola_velocity_x)[2]
+
+    running = True
+    inverte=False
+    item_img=pygame.image.load("inverte.jpg").convert_alpha()
+    item_img=pygame.transform.scale(item_img, (489//10,750//10))
+    item=Fogo(item_img)
+    while running:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    loop()
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                if event.key == pygame.K_PAUSE:
+                    bola_velocity_x=0
+                    bola_velocity_y=0
+                if event.key == pygame.K_UP:
+                    if inverte==False:
+                        Vestibulando.y = Vestibulando.y-90
+                    else:
+                        Vestibulando.y = Vestibulando.y+90
+
+                if event.key == pygame.K_DOWN:
+                    if inverte==False:
+                        Vestibulando.y = Vestibulando.y+90
+                    else:
+                        Vestibulando.y = Vestibulando.y-90
+
+                if event.type == pygame.KEYDOWN:
+                    if inverte==False:
+                        if event.key == pygame.K_w:
+                            alunoInsper.y = alunoInsper.y-90
+                        if event.key == pygame.K_s:
+                            alunoInsper.y = alunoInsper.y+90
+                    else:
+                        if event.key == pygame.K_w:
+                            alunoInsper.y = alunoInsper.y+90
+                        if event.key == pygame.K_s:
+                            alunoInsper.y = alunoInsper.y-90
+
+        alunoInsper.y = alunoInsper.y + alunoInsper_velocity
+        if alunoInsper.y <bola.y:
+           alunoInsper.top += alunoInsper_velocity
+        if Vestibulando.bottom > bola.y:
+            alunoInsper.bottom -= alunoInsper_velocity
+        if alunoInsper.top <= 0 :
+            alunoInsper.top = 0
+        if alunoInsper.bottom >= screen_y:
+           alunoInsper.bottom = screen_y
+
+        Vestibulando.y = Vestibulando.y + Vestibulando_velocity
+        if Vestibulando.top <= 0:
+            Vestibulando.top = 0
+        if Vestibulando.bottom >= screen_y:
+            Vestibulando.bottom = screen_y
