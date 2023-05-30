@@ -93,3 +93,54 @@ def loop():
     item_img = pygame.image.load("inverte.jpg").convert_alpha()
     item_img = pygame.transform.scale(item_img, (489//10,750//10))
     item = Fogo(item_img)
+    while running:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    loop()
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                if event.key == pygame.K_PAUSE:
+                    bola_velocity_x=0
+                    bola_velocity_y=0
+                if event.key == pygame.K_UP:
+                    if inverte == False:
+                        Vestibulando.y = Vestibulando.y-90
+                    else:
+                        Vestibulando.y = Vestibulando.y+90
+
+                if event.key == pygame.K_DOWN:
+                    if inverte == False:
+                        Vestibulando.y = Vestibulando.y+90
+                    else:
+                        Vestibulando.y = Vestibulando.y-90
+
+                if event.type == pygame.KEYDOWN:
+                    if inverte == False:
+                        if event.key == pygame.K_w:
+                            alunoInsper.y = alunoInsper.y-90
+                        if event.key == pygame.K_s:
+                            alunoInsper.y = alunoInsper.y+90
+                    else:
+                        if event.key == pygame.K_w:
+                            alunoInsper.y = alunoInsper.y+90
+                        if event.key == pygame.K_s:
+                            alunoInsper.y = alunoInsper.y-90
+
+        alunoInsper.y = alunoInsper.y + alunoInsper_velocity
+        if alunoInsper.y <bola.y:
+           alunoInsper.top += alunoInsper_velocity
+        if Vestibulando.bottom > bola.y:
+            alunoInsper.bottom -= alunoInsper_velocity
+        if alunoInsper.top <= 0 :
+            alunoInsper.top = 0
+        if alunoInsper.bottom >= screen_y:
+           alunoInsper.bottom = screen_y
+
+        Vestibulando.y = Vestibulando.y + Vestibulando_velocity
+        if Vestibulando.top <= 0:
+            Vestibulando.top = 0
+
