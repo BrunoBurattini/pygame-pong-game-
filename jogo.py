@@ -146,7 +146,7 @@ def loop():
         if Vestibulando.bottom >= screen_y:
             Vestibulando.bottom = screen_y
             
-bola.x = bola.x + bola_velocity_x
+        bola.x = bola.x + bola_velocity_x
         bola.y = bola.y + bola_velocity_y
         agora=pygame.time.get_ticks()
 
